@@ -34,7 +34,7 @@ app.use(
 );
 
 /** Initalize Relations */
-// initAssociations();
+initAssociations();
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

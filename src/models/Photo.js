@@ -2,38 +2,24 @@ const { DataTypes } = require('sequelize');
 
 const sequelize = require('../configs/database');
 
-const User = sequelize.define('User', {
+const Photo = sequelize.define('Photo', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     allowNull: false,
     primaryKey: true,
   },
-  firstName: {
+  userId: {
+    type: DataTypes.UUID,
+    allowNull: false,
+  },
+  title: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  lastName: {
+  url: {
     type: DataTypes.STRING,
     allowNull: false,
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  isEmailVerified: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    defaultValue: false,
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  resetToken: {
-    type: DataTypes.STRING,
-    allowNull: true,
   },
   isDeleted: {
     type: DataTypes.BOOLEAN,
@@ -42,4 +28,4 @@ const User = sequelize.define('User', {
   },
 });
 
-module.exports = User;
+module.exports = Photo;

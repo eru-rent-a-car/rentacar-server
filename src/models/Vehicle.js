@@ -30,7 +30,7 @@ const Vehicle = sequelize.define('Vehicle', {
     allowNull: false,
   },
   photos: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
+    type: DataTypes.STRING,
     allowNull: true,
   },
   isDeleted: {
