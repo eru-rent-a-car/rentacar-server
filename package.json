@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oktayparlak/rent-a-car-app.git"
+    "url": "git+https://github.com/designprojectt/rentacar-server.git"
   },
   "author": "Oktay Parlak",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/oktayparlak/rent-a-car-app/issues"
+    "url": "https://github.com/designprojectt/rentacar-server/issues"
   },
-  "homepage": "https://github.com/oktayparlak/rent-a-car-app#readme",
+  "homepage": "https://github.com/designprojectt/rentacar-server#readme",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",

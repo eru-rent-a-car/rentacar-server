@@ -4,9 +4,8 @@ const rateLimit = require('express-rate-limit');
 const morgan = require('morgan');
 
 const sequelize = require('./src/configs/database');
-const { initAssociations } = require('./src/models/index');
-
-const authRoutes = require('./src/routes/auth.route');
+const initAssociations = require('./src/models/index');
+const routes = require('./src/routes/index');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -41,7 +40,7 @@ app.get('/', (req, res) => {
 });
 
 /** Routes */
-app.use('/auth', authRoutes);
+routes(app);
 
 sequelize.sync({ force: true }).then(() => {
   console.log('Database connected!');

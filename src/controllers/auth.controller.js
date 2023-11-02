@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const User = require('../models/User');
+const { sendEmail } = require('../services/mail.service');
 const { validateRegister, validateLogin } = require('../validators/user.validate');
 
 require('dotenv').config();

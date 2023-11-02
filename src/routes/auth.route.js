@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const authController = require('../controllers/auth.controller');
-const { verifyToken } = require('../middlewares/auth');
+const verifyToken = require('../middlewares/auth');
 
 /** Post */
 router.post('/register', authController.register);

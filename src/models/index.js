@@ -3,7 +3,7 @@ const Photo = require('./Photo');
 const User = require('./User');
 const Vehicle = require('./Vehicle');
 
-exports.initAssociations = () => {
+module.exports = () => {
   Booking.belongsTo(User, { foreignKey: 'userId' });
   Booking.belongsTo(Vehicle, { foreignKey: 'vehicleId' });
   User.hasMany(Booking, { foreignKey: 'userId' });
