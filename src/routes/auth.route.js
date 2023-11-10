@@ -3,12 +3,13 @@ const express = require('express');
 const router = express.Router();
 
 const authController = require('../controllers/auth.controller');
-const verifyToken = require('../middlewares/auth');
+const userSchema = require('../schemas/user.schema');
+const validate = require('../middlewares/validate');
 
 /** Post */
-router.post('/register', authController.register);
+router.post('/register', validate(userSchema.register), authController.register);
 
-router.post('/login', authController.login);
+router.post('/login', validate(userSchema.login), authController.login);
 
 router.post('/forgot-password', authController.forgotPassword);
 

@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 const User = require('../models/User');
 const { sendEmail } = require('../services/mail.service');
-const { validateRegister, validateLogin } = require('../validators/user.validate');
+const { validateRegister, validateLogin } = require('../schemas/user.schema');
 
 require('dotenv').config();
 
