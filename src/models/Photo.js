@@ -9,14 +9,6 @@ const Photo = sequelize.define('Photo', {
     allowNull: false,
     primaryKey: true,
   },
-  userId: {
-    type: DataTypes.UUID,
-    allowNull: false,
-  },
-  title: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   url: {
     type: DataTypes.STRING,
     allowNull: false,

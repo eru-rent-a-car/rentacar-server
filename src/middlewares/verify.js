@@ -1,9 +1,12 @@
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
+const AppError = require('../utilities/AppError');
 
 module.exports = (req, res, next) => {
   const token = req.header('Authorization');
   if (!token) {
-    return res.status(401).json({ error: { message: 'Unauthorized' } });
+    next(new AppError('Unauthorized', 401));
   }
   if (token.startsWith('Bearer ')) {
     token = token.slice(7, token.length).trimLeft();
@@ -14,6 +17,6 @@ module.exports = (req, res, next) => {
     req.user = decoded;
     next();
   } catch (error) {
-    return res.status(400).json({ error: { message: 'Invalid token' } });
+    next(new AppError('Unauthorized', 401));
   }
 };

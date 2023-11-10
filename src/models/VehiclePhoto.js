@@ -2,36 +2,21 @@ const { DataTypes } = require('sequelize');
 
 const sequelize = require('../configs/database');
 
-const Vehicle = sequelize.define('Vehicle', {
+const VehiclePhoto = sequelize.define('VehiclePhoto', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     allowNull: false,
     primaryKey: true,
   },
-  userId: {
+  vehicleId: {
     type: DataTypes.UUID,
     allowNull: false,
   },
-  brand: {
-    type: DataTypes.STRING,
+  photoId: {
+    type: DataTypes.UUID,
     allowNull: false,
-  },
-  model: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  year: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  description: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  price: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
+    unique: true,
   },
   isDeleted: {
     type: DataTypes.BOOLEAN,
@@ -40,4 +25,4 @@ const Vehicle = sequelize.define('Vehicle', {
   },
 });
 
-module.exports = Vehicle;
+module.exports = VehiclePhoto;
