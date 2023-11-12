@@ -56,7 +56,6 @@ exports.chooseMailTemplate = (user, token, type) => {
 };
 
 exports.sendEmail = async (email, content) => {
-  console.log(content);
   try {
     const transporter = nodeMailer.createTransport({
       service: 'hotmail',

@@ -1,5 +1,4 @@
 const Vehicle = require('../models/Vehicle');
-const AppError = require('../utilities/AppError');
 
 /** Create */
 exports.create = async (req, res) => {
@@ -7,7 +6,7 @@ exports.create = async (req, res) => {
     const vehicle = await Vehicle.create(req.body);
     return res.status(201).status(vehicle);
   } catch (error) {
-    return res.send(new AppError(error, 500));
+    return res.status(500).json(error);
   }
 };
 
@@ -17,7 +16,7 @@ exports.getAll = async (req, res) => {
     const vehicles = await Vehicle.findAll({ where: { isDeleted: false } });
     return res.status(200).json(vehicles);
   } catch (error) {
-    return res.send(new AppError(error, 500));
+    return res.status(500).json(error);
   }
 };
 
@@ -27,7 +26,7 @@ exports.getById = async (req, res) => {
     if (!vehicle) return res.status(404).json({ error: { message: 'Vehicle not found!' } });
     return res.status(200).json(vehicle);
   } catch (error) {
-    return res.send(new AppError(error, 500));
+    return res.status(500).json(error);
   }
 };
 
@@ -39,7 +38,7 @@ exports.update = async (req, res) => {
     await vehicle.update(req.body);
     return res.status(200).json(vehicle);
   } catch (error) {
-    return res.send(new AppError(error, 500));
+    return res.status(500).json(error);
   }
 };
 
@@ -51,6 +50,6 @@ exports.delete = async (req, res) => {
     await vehicle.update({ isDeleted: true });
     return res.status(200).json({ message: 'Vehicle deleted successfully!' });
   } catch (error) {
-    return res.send(new AppError(error, 500));
+    return res.status(500).json(error);
   }
 };

@@ -32,11 +32,11 @@ const User = sequelize.define('User', {
     allowNull: false,
   },
   resetToken: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: true,
   },
   verifyToken: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: true,
   },
   isDeleted: {
