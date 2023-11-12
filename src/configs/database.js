@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
-const sequelize = new Sequelize(process.env.DB_URI_LOCAL, {
+const sequelize = new Sequelize(process.env.DB_URI, {
   logging: false,
 });
 
