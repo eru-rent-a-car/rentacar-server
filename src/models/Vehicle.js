@@ -25,6 +25,10 @@ const Vehicle = sequelize.define('Vehicle', {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  isAutomatic: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+  },
   description: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -32,6 +36,11 @@ const Vehicle = sequelize.define('Vehicle', {
   price: {
     type: DataTypes.INTEGER,
     allowNull: false,
+  },
+  isRented: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
   },
   isDeleted: {
     type: DataTypes.BOOLEAN,

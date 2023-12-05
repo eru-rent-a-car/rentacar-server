@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const morgan = require('morgan');
+const fileUpload = require('express-fileupload');
+const AWS = require('aws-sdk');
 require('dotenv').config();
 
 const sequelize = require('./src/configs/database');
@@ -22,6 +24,16 @@ app.use(
   })
 );
 
+/** File Upload Configuration */
+AWS.config.update({
+  region: 'eu-west-3',
+});
+app.use(
+  fileUpload({
+    limits: { fileSize: 50 * 1024 * 1024 },
+  })
+);
+
 /** Apply the rate limiting middleware to all requests */
 app.use(
   rateLimit({
@@ -37,7 +49,7 @@ app.use(
 initAssociations();
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  return res.send('Hello World!');
 });
 
 /** Routes */

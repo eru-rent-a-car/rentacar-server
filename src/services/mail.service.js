@@ -22,7 +22,7 @@ exports.chooseMailTemplate = (user, token, type) => {
           Thanks,
         </p>
         <p>
-          Your company name
+          Rent A Car
         </p>
       </div>
     `,
@@ -46,7 +46,7 @@ exports.chooseMailTemplate = (user, token, type) => {
           Thanks,
         </p>
         <p>
-          Your company name
+          Rent A Car
         </p>
       </div>
     `,
@@ -58,14 +58,15 @@ exports.chooseMailTemplate = (user, token, type) => {
 exports.sendEmail = async (email, content) => {
   try {
     const transporter = nodeMailer.createTransport({
-      service: 'hotmail',
+      host: process.env.EMAIL_HOST,
+      port: process.env.EMAIL_PORT,
       auth: {
-        user: process.env.EMAIL_USERNAME,
-        pass: process.env.EMAIL_PASSWORD,
+        user: process.env.SMPT_API_KEY,
+        pass: process.env.SMPT_API_SECRET,
       },
     });
     const mailOptions = {
-      from: process.env.EMAIL_USERNAME,
+      from: 'oktay.parlak.12@hotmail.com',
       to: email,
       ...content,
     };

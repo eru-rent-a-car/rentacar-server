@@ -4,8 +4,12 @@ const router = express.Router();
 
 const vehicleController = require('../controllers/vehicle.controller');
 const vehicleSchema = require('../schemas/vehicle.schema');
+
 const validate = require('../middlewares/validateSchema');
 const verify = require('../middlewares/verify');
+const checkRole = require('../middlewares/checkRole');
+
+const { ADMIN, USER } = require('../helpers/roles');
 
 /** Get */
 router.get('/', vehicleController.getAll);
@@ -13,7 +17,7 @@ router.get('/', vehicleController.getAll);
 router.get('/:id', vehicleController.getById);
 
 /** Post */
-router.post('/', verify, validate(vehicleSchema.create), vehicleController.create);
+router.post('/', verify, vehicleController.create);
 
 /** Patch */
 router.patch('/:id', verify, validate(vehicleSchema.update), vehicleController.update);

@@ -18,6 +18,7 @@ exports.register = async (req, res) => {
     newUser.verifyToken = token;
     await newUser.save();
     sendEmail(newUser.email, chooseMailTemplate(newUser, token, 'verifyEmail'));
+    newUser.verifyToken = undefined;
     return res.status(201).json(newUser);
   } catch (error) {
     return res.status(500).json(error);
@@ -29,6 +30,9 @@ exports.login = async (req, res, next) => {
     const user = await User.findOne({ where: { email: req.body.email, isDeleted: false } });
     if (!user) {
       return res.status(400).json({ error: { message: 'Email does not exist' } });
+    }
+    if (!user.isEmailVerified) {
+      return res.status(400).json({ error: { message: 'Email not verified. Plese verify email' } });
     }
     const isMatch = await bcrypt.compare(req.body.password, user.password);
     if (!isMatch) {
