@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "auth",
+			"name": "Auth",
 			"item": [
 				{
 					"name": "Register",
@@ -146,7 +146,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"okatay.parlak.12@gmail.com\",\r\n    \"password\": \"Op123456@\"\r\n}",
+							"raw": "{\r\n    \"email\": \"oktay.parlak.12@gmail.com\",\r\n    \"password\": \"Op123456@\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -185,8 +185,13 @@
 							"type": "jwt",
 							"jwt": [
 								{
-									"key": "algorithm",
-									"value": "HS256",
+									"key": "payload",
+									"value": "{\r\n    \"user\": {\r\n    \"id\": \"ef9332de-d683-45ed-9163-209e29382d04\",\r\n    \"firstName\": \"oktay\",\r\n    \"lastName\": \"parlak\",\r\n    \"email\": \"oktay.parlak.12@gmail.com\",\r\n    \"isEmailVerified\": true,\r\n    \"password\": \"$2b$10$iCLiks7TTuvscQTKTOrcZO4lmAMkvn/0fN6mNx2S1bLpQ5aM6iaSG\",\r\n    \"resetToken\": null,\r\n    \"verifyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiZWY5MzMyZGUtZDY4My00NWVkLTkxNjMtMjA5ZTI5MzgyZDA0IiwiaXNFbWFpbFZlcmlmaWVkIjpmYWxzZSwicm9sZSI6IlVTRVIiLCJpc0RlbGV0ZWQiOmZhbHNlLCJmaXJzdE5hbWUiOiJva3RheSIsImxhc3ROYW1lIjoicGFybGFrIiwiZW1haWwiOiJva3RheS5wYXJsYWsuMTJAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkaUNMaWtzN1RUdXZzY1FUS1RPcmNaTzRsbUFNa3ZuLzBmTjZtTngyUzFiTHBRNWFNNmlhU0cifSwiaWF0IjoxNzAxNjIwODg1LCJleHAiOjE3MDE3MDcyODV9.EeZjAKuRMcGHAOcl6Bf61q0-M4fDrUIxd86h8GYHOKs\",\r\n    \"role\": \"USER\",\r\n    \"isDeleted\": false,\r\n    \"createdAt\": \"2023-12-03T16:28:05.322Z\",\r\n    \"updatedAt\": \"2023-12-03T16:28:05.322Z\"\r\n  }\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
 									"type": "string"
 								},
 								{
@@ -195,8 +200,13 @@
 									"type": "boolean"
 								},
 								{
-									"key": "payload",
-									"value": "{}",
+									"key": "secret",
+									"value": "secret",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
 									"type": "string"
 								},
 								{
@@ -212,11 +222,6 @@
 								{
 									"key": "queryParamKey",
 									"value": "token",
-									"type": "string"
-								},
-								{
-									"key": "header",
-									"value": "{}",
 									"type": "string"
 								}
 							]
@@ -302,6 +307,15 @@
 						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"oktay.parlak.12@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{BASE_URL}}/api/auths/resend-verification-email",
 							"host": [
@@ -382,7 +396,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/auths/reset-password/?resetToken=denemereset",
+							"raw": "{{BASE_URL}}/api/auths/reset-password/?resetToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiZjNmMmFlMmMtOTI0Ny00Mzc5LWIwZmMtNDcyMmY2NTgzNzBjIiwiZmlyc3ROYW1lIjoib2t0YXkiLCJsYXN0TmFtZSI6InBhcmxhayIsImVtYWlsIjoib2t0YXkucGFybGFrLjEyQGdtYWlsLmNvbSIsImlzRW1haWxWZXJpZmllZCI6ZmFsc2UsInBhc3N3b3JkIjoiJDJiJDEwJG9sRnhZUzlzck14YVNNdi9YcVI2eXVYekpTNzhqenp1Lmw3bEJxd1lKbXR5dEZ1ZFFxTTNLIiwicmVzZXRUb2tlbiI6bnVsbCwidmVyaWZ5VG9rZW4iOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlJanA3SW1sa0lqb2laak5tTW1GbE1tTXRPVEkwTnkwME16YzVMV0l3Wm1NdE5EY3lNbVkyTlRnek56QmpJaXdpYVhORmJXRnBiRlpsY21sbWFXVmtJanBtWVd4elpTd2lhWE5FWld4bGRHVmtJanBtWVd4elpTd2labWx5YzNST1lXMWxJam9pYjJ0MFlYa2lMQ0pzWVhOMFRtRnRaU0k2SW5CaGNteGhheUlzSW1WdFlXbHNJam9pYjJ0MFlYa3VjR0Z5YkdGckxqRXlRR2R0WVdsc0xtTnZiU0lzSW5CaGMzTjNiM0prSWpvaUpESmlKREV3Skc5c1JuaFpVemx6Y2sxNFlWTk5kaTlZY1ZJMmVYVllla3BUTnpocWVucDFMbXczYkVKeGQxbEtiWFI1ZEVaMVpGRnhUVE5MSW4wc0ltbGhkQ0k2TVRZNU9UZ3dPVFl3Tnl3aVpYaHdJam94TmprNU9EazJNREEzZlEuMWR5RFRGMWdPWjdOSDh1N3F2RzEtQnZ2MUJScExwZWJlei1pT1ViQ0llRSIsImlzRGVsZXRlZCI6ZmFsc2UsImNyZWF0ZWRBdCI6IjIwMjMtMTEtMTJUMTc6MjA6MDcuODUyWiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMTJUMTc6MjA6MDcuODUyWiJ9LCJpYXQiOjE2OTk4MDk2MTMsImV4cCI6MTY5OTgxMzIxM30.muRvH-PO6xd9ibvD7VzhMbFfaQYTeB9frZes5aNZRpY",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -395,7 +409,7 @@
 							"query": [
 								{
 									"key": "resetToken",
-									"value": "denemereset"
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiZjNmMmFlMmMtOTI0Ny00Mzc5LWIwZmMtNDcyMmY2NTgzNzBjIiwiZmlyc3ROYW1lIjoib2t0YXkiLCJsYXN0TmFtZSI6InBhcmxhayIsImVtYWlsIjoib2t0YXkucGFybGFrLjEyQGdtYWlsLmNvbSIsImlzRW1haWxWZXJpZmllZCI6ZmFsc2UsInBhc3N3b3JkIjoiJDJiJDEwJG9sRnhZUzlzck14YVNNdi9YcVI2eXVYekpTNzhqenp1Lmw3bEJxd1lKbXR5dEZ1ZFFxTTNLIiwicmVzZXRUb2tlbiI6bnVsbCwidmVyaWZ5VG9rZW4iOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKMWMyVnlJanA3SW1sa0lqb2laak5tTW1GbE1tTXRPVEkwTnkwME16YzVMV0l3Wm1NdE5EY3lNbVkyTlRnek56QmpJaXdpYVhORmJXRnBiRlpsY21sbWFXVmtJanBtWVd4elpTd2lhWE5FWld4bGRHVmtJanBtWVd4elpTd2labWx5YzNST1lXMWxJam9pYjJ0MFlYa2lMQ0pzWVhOMFRtRnRaU0k2SW5CaGNteGhheUlzSW1WdFlXbHNJam9pYjJ0MFlYa3VjR0Z5YkdGckxqRXlRR2R0WVdsc0xtTnZiU0lzSW5CaGMzTjNiM0prSWpvaUpESmlKREV3Skc5c1JuaFpVemx6Y2sxNFlWTk5kaTlZY1ZJMmVYVllla3BUTnpocWVucDFMbXczYkVKeGQxbEtiWFI1ZEVaMVpGRnhUVE5MSW4wc0ltbGhkQ0k2TVRZNU9UZ3dPVFl3Tnl3aVpYaHdJam94TmprNU9EazJNREEzZlEuMWR5RFRGMWdPWjdOSDh1N3F2RzEtQnZ2MUJScExwZWJlei1pT1ViQ0llRSIsImlzRGVsZXRlZCI6ZmFsc2UsImNyZWF0ZWRBdCI6IjIwMjMtMTEtMTJUMTc6MjA6MDcuODUyWiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMTJUMTc6MjA6MDcuODUyWiJ9LCJpYXQiOjE2OTk4MDk2MTMsImV4cCI6MTY5OTgxMzIxM30.muRvH-PO6xd9ibvD7VzhMbFfaQYTeB9frZes5aNZRpY"
 								}
 							]
 						}
@@ -468,7 +482,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/auths/verify-email/?verifyToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNTQyMTVhMTgtZGJiOS00ODY2LTg5ZjMtMDEyNmUwOGNlOGYxIiwiaXNFbWFpbFZlcmlmaWVkIjpmYWxzZSwiaXNEZWxldGVkIjpmYWxzZSwiZmlyc3ROYW1lIjoib2t0YXkiLCJsYXN0TmFtZSI6InBhcmxhayIsImVtYWlsIjoib2t0YXkucGFybGFrLjEyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJGhaSGxLL1VhaXpvZ2Y1bFhKb0Q4eXUyRmp4bjBVU2ZzRGdqSGVXQnN4MllFbVNTcWNKN2ZLIn0sImlhdCI6MTY5OTgwODQ3OSwiZXhwIjoxNjk5ODk0ODc5fQ.VaUdO4hWXDbyxIcqA37IIcjKZGY8eNnysz94VtaCtSY",
+							"raw": "{{BASE_URL}}/api/auths/verify-email/?verifyToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY2ZmZmY2EtZjFiYi00YjdhLWE3YzYtNjg0OGRhMGIxMTRkIiwiaXNFbWFpbFZlcmlmaWVkIjpmYWxzZSwiaXNEZWxldGVkIjpmYWxzZSwiZmlyc3ROYW1lIjoib2t0YXkiLCJsYXN0TmFtZSI6InBhcmxhayIsImVtYWlsIjoib2t0YXkucGFybGFrLjEyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHRQNG04MFc2LmZ3ckMzYzV0RU82cmVSTWtnRUh1SnNCUWVTTkQxUVhXcjhqQmsvM0FOU0Y2In0sImlhdCI6MTY5OTgwOTQ0NiwiZXhwIjoxNjk5ODk1ODQ2fQ.wxrsLMnhgfxLpv_nxGfEFtI9Ddhvvnl8X3YHwZjzHz8",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -481,7 +495,7 @@
 							"query": [
 								{
 									"key": "verifyToken",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNTQyMTVhMTgtZGJiOS00ODY2LTg5ZjMtMDEyNmUwOGNlOGYxIiwiaXNFbWFpbFZlcmlmaWVkIjpmYWxzZSwiaXNEZWxldGVkIjpmYWxzZSwiZmlyc3ROYW1lIjoib2t0YXkiLCJsYXN0TmFtZSI6InBhcmxhayIsImVtYWlsIjoib2t0YXkucGFybGFrLjEyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJGhaSGxLL1VhaXpvZ2Y1bFhKb0Q4eXUyRmp4bjBVU2ZzRGdqSGVXQnN4MllFbVNTcWNKN2ZLIn0sImlhdCI6MTY5OTgwODQ3OSwiZXhwIjoxNjk5ODk0ODc5fQ.VaUdO4hWXDbyxIcqA37IIcjKZGY8eNnysz94VtaCtSY"
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY2ZmZmY2EtZjFiYi00YjdhLWE3YzYtNjg0OGRhMGIxMTRkIiwiaXNFbWFpbFZlcmlmaWVkIjpmYWxzZSwiaXNEZWxldGVkIjpmYWxzZSwiZmlyc3ROYW1lIjoib2t0YXkiLCJsYXN0TmFtZSI6InBhcmxhayIsImVtYWlsIjoib2t0YXkucGFybGFrLjEyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHRQNG04MFc2LmZ3ckMzYzV0RU82cmVSTWtnRUh1SnNCUWVTTkQxUVhXcjhqQmsvM0FOU0Y2In0sImlhdCI6MTY5OTgwOTQ0NiwiZXhwIjoxNjk5ODk1ODQ2fQ.wxrsLMnhgfxLpv_nxGfEFtI9Ddhvvnl8X3YHwZjzHz8"
 								}
 							]
 						}
@@ -491,14 +505,295 @@
 			]
 		},
 		{
-			"name": "vehicle",
-			"item": []
+			"name": "Vehicle",
+			"item": [
+				{
+					"name": "Create Vehicle",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photos",
+									"contentType": "",
+									"type": "file",
+									"src": "/C:/Users/oktay/Downloads/view-3d-car.jpg"
+								},
+								{
+									"key": "photos",
+									"type": "file",
+									"src": "/C:/Users/oktay/Downloads/asd.jpg"
+								},
+								{
+									"key": "brand",
+									"value": "Maserati",
+									"contentType": "",
+									"type": "text"
+								},
+								{
+									"key": "model",
+									"value": "sa52",
+									"type": "text"
+								},
+								{
+									"key": "year",
+									"value": "2005",
+									"type": "text"
+								},
+								{
+									"key": "isAutomatic",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Sports Car",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "1000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/vehicles",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"vehicles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Vehicles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/vehicles",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"vehicles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vehicle By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/vehicles/4745e94e-a2b1-4bbe-9dce-12973fcae192",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								"4745e94e-a2b1-4bbe-9dce-12973fcae192"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Vehicle",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/vehicles",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"vehicles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
-			"name": "booking",
+			"name": "Booking",
+			"item": [
+				{
+					"name": "Create Booking",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/auths/vehicles",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"auths",
+								"vehicles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Bookings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/auths/vehicles",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"auths",
+								"vehicles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Booking By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/auths/vehicles/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"auths",
+								"vehicles",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Booking",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/auths/vehicles/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"auths",
+								"vehicles",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
 			"item": []
 		}
 	],
+	"auth": {
+		"type": "jwt",
+		"jwt": [
+			{
+				"key": "payload",
+				"value": "{\r\n    \"user\": {\r\n    \"id\": \"e3597ee4-2f01-4918-a4ab-fb8f94954172\",\r\n    \"isEmailVerified\": false,\r\n    \"role\": \"USER\",\r\n    \"isDeleted\": false,\r\n    \"firstName\": \"oktay\",\r\n    \"lastName\": \"parlak\",\r\n    \"email\": \"oktay.parlak.12@gmail.com\",\r\n    \"password\": \"$2b$10$GEiXM2yDyo6kenD9QK84Pu9UxYJHjbw/SNnzE4xFHI0IPNKRWA.nG\",\r\n    \"updatedAt\": \"2023-12-06T17:39:16.436Z\",\r\n    \"createdAt\": \"2023-12-06T17:39:16.436Z\",\r\n    \"resetToken\": null\r\n}\r\n}",
+				"type": "string"
+			},
+			{
+				"key": "secret",
+				"value": "secret",
+				"type": "string"
+			},
+			{
+				"key": "algorithm",
+				"value": "HS256",
+				"type": "string"
+			},
+			{
+				"key": "isSecretBase64Encoded",
+				"value": false,
+				"type": "boolean"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "headerPrefix",
+				"value": "Bearer",
+				"type": "string"
+			},
+			{
+				"key": "queryParamKey",
+				"value": "token",
+				"type": "string"
+			},
+			{
+				"key": "header",
+				"value": "{}",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",

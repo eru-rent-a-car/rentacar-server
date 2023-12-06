@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 /** Routes */
 routes(app);
 
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync({ force: false }).then(() => {
   console.log('Database connected!');
   /** Server */
   app.listen(PORT, () => {
