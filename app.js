@@ -2,8 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const morgan = require('morgan');
-const fileUpload = require('express-fileupload');
-const AWS = require('aws-sdk');
+// const fileUpload = require('express-fileupload');
 require('dotenv').config();
 
 const sequelize = require('./src/configs/database');
@@ -21,16 +20,6 @@ app.use(
   cors({
     origin: process.env.CLIENT_URL,
     optionsSuccessStatus: 200,
-  })
-);
-
-/** File Upload Configuration */
-AWS.config.update({
-  region: 'eu-west-3',
-});
-app.use(
-  fileUpload({
-    limits: { fileSize: 50 * 1024 * 1024 },
   })
 );
 
@@ -55,7 +44,7 @@ app.get('/', (req, res) => {
 /** Routes */
 routes(app);
 
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: true }).then(() => {
   console.log('Database connected!');
   /** Server */
   app.listen(PORT, () => {

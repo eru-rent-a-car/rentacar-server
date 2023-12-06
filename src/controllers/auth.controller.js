@@ -83,20 +83,24 @@ exports.resetPassword = async (req, res) => {
 };
 
 exports.verifyEmail = async (req, res) => {
-  const { verifyToken } = req.query;
-  const decoded = jwt.verify(verifyToken, process.env.JWT_SECRET_VERIFY);
-  if (!decoded) {
-    return res.status(400).json({ error: { message: 'Invalid token' } });
+  try {
+    const { verifyToken } = req.query;
+    const decoded = jwt.verify(verifyToken, process.env.JWT_SECRET_VERIFY);
+    if (!decoded) {
+      return res.status(400).json({ error: { message: 'Invalid token' } });
+    }
+    const user = await User.findOne({ where: { id: decoded.user.id, isDeleted: false } });
+    if (!user) {
+      return res.status(400).json({ error: { message: 'User does not exist' } });
+    }
+    if (user.isVerified) {
+      return res.status(400).json({ error: { message: 'Email already verified' } });
+    }
+    await user.update({ isVerified: true });
+    return res.status(200).json({ message: 'Email verified successfully' });
+  } catch (error) {
+    return res.status(500).json(error);
   }
-  const user = await User.findOne({ where: { id: decoded.user.id, isDeleted: false } });
-  if (!user) {
-    return res.status(400).json({ error: { message: 'User does not exist' } });
-  }
-  if (user.isVerified) {
-    return res.status(400).json({ error: { message: 'Email already verified' } });
-  }
-  await user.update({ isVerified: true });
-  return res.status(200).json({ message: 'Email verified successfully' });
 };
 
 exports.resendVerificationEmail = async (req, res) => {
