@@ -93,10 +93,10 @@ exports.verifyEmail = async (req, res) => {
     if (!user) {
       return res.status(400).json({ error: { message: 'User does not exist' } });
     }
-    if (user.isVerified) {
+    if (user.isEmailVerified) {
       return res.status(400).json({ error: { message: 'Email already verified' } });
     }
-    await user.update({ isVerified: true });
+    await user.update({ isEmailVerified: true });
     return res.status(200).json({ message: 'Email verified successfully' });
   } catch (error) {
     return res.status(500).json(error);
@@ -110,7 +110,7 @@ exports.resendVerificationEmail = async (req, res) => {
     if (!user) {
       return res.status(400).json({ error: { message: 'Email does not exist' } });
     }
-    if (user.isVerified) {
+    if (user.isEmailVerified) {
       return res.status(400).json({ error: { message: 'Email already verified' } });
     }
     if (user.verifyToken && jwt.verify(user.verifyToken, process.env.JWT_SECRET_KEY_VERIFY)) {
