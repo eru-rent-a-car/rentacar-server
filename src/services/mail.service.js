@@ -14,7 +14,7 @@ exports.chooseMailTemplate = (user, token, type) => {
         <p>
           Please click on the following link, or paste this into your browser to complete the process within one hour of receiving it:
         </p>
-        <a href="${process.env.CLIENT_URL}/reset-password/${token}">Reset Password</a>
+        <a href="${process.env.CLIENT_URL}/reset-password?token=${token}">Reset Password</a>
         <p>
           If you did not request this, please ignore this email and your password will remain unchanged.
         </p>
@@ -38,7 +38,7 @@ exports.chooseMailTemplate = (user, token, type) => {
         <p>
           Please click on the following link, or paste this into your browser to complete the process within one hour of receiving it:
         </p>
-        <a href="${process.env.CLIENT_URL}/verify-email/${token}">Verify Email</a>
+        <a href="${process.env.CLIENT_URL}/verify-email?token=${token}">Verify Email</a>
         <p>
           If you did not request this, please ignore this email and your email will remain unverified.
         </p>

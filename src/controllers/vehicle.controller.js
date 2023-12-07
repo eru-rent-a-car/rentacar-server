@@ -27,25 +27,6 @@ exports.create = async (req, res) => {
 exports.getAll = async (req, res) => {
   try {
     const { limit, offset } = req.query;
-    // const vehicles = await Vehicle.findAll({
-    //   where: { isRented: false, isDeleted: false },
-    //   limit: limit || 10,
-    //   offset: offset || 0,
-    //   include: [VehiclePhoto],
-    // });
-
-    // const vehicles = await VehiclePhoto.findAll({
-    //   where: { isDeleted: false },
-    //   limit: limit || 10,
-    //   offset: offset || 0,
-    //   include: [
-    //     {
-    //       model: Vehicle,
-    //       where: { isRented: false, isDeleted: false },
-    //       include: [Photo],
-    //     },
-    //   ],
-    // });
     const vehicles = await Vehicle.findAll({
       where: { isRented: false, isDeleted: false },
       limit: limit || 10,

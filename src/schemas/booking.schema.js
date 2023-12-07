@@ -15,4 +15,8 @@ const update = Joi.object({
   status: Joi.string().valid('PENDING', 'APPROVED', 'REJECTED'),
 });
 
-module.exports = { create, update };
+const accept = Joi.object({
+  status: Joi.string().valid('APPROVED', 'REJECTED'),
+});
+
+module.exports = { create, update, accept };

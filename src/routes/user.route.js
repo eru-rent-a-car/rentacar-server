@@ -14,6 +14,8 @@ const { ADMIN, USER } = require('../helpers/roles');
 /** Get */
 router.get('/:id', verify, userController.getById);
 
+router.get('/', verify, checkRole([USER, ADMIN]), userController.getAll);
+
 /** Post */
 
 /** Patch */
