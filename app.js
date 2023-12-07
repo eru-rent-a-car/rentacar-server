@@ -2,11 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const morgan = require('morgan');
-// const fileUpload = require('express-fileupload');
+
 require('dotenv').config();
 
 const sequelize = require('./src/configs/database');
 const initAssociations = require('./src/models/index');
+const { checkBookingStatus } = require('./src/helpers/scheduleJobs');
 const routes = require('./src/routes/index');
 
 const app = express();
@@ -37,13 +38,17 @@ app.use(
 /** Initalize Relations */
 initAssociations();
 
+/** Schedule Jobs */
+checkBookingStatus();
+
+/** Routes */
 app.get('/', (req, res) => {
   return res.send('Hello World!');
 });
 
-/** Routes */
 routes(app);
 
+/** Database Connection and Starting Server */
 sequelize.sync({ force: false }).then(() => {
   console.log('Database connected!');
   /** Server */

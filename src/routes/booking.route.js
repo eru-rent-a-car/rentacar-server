@@ -9,20 +9,18 @@ const validate = require('../middlewares/validateSchema');
 
 const verify = require('../middlewares/verify');
 const checkRole = require('../middlewares/checkRole');
-const roles = require('../helpers/roles');
+const { ADMIN, USER } = require('../helpers/roles');
 
 /** Get */
-router.get('/', verify, checkRole([roles.ADMIN]), bookingController.getAll);
-
 router.get('/:id', verify, bookingController.getById);
 
 /** Post */
 router.post('/', verify, validate(bookingSchema.create), bookingController.create);
 
 /** Patch */
-router.patch('/:id', verify, checkRole([roles.ADMIN]), validate(bookingSchema.update), bookingController.update);
+router.patch('/:id', verify, validate(bookingSchema.update), bookingController.update);
+
+router.patch('/accept/:id', verify, checkRole([ADMIN, USER]), bookingController.acceptBooking);
 
 /** Delete */
-router.delete('/:id', verify, checkRole([roles.ADMIN]), bookingController.delete);
-
 module.exports = router;
