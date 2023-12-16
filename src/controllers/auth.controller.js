@@ -29,14 +29,14 @@ exports.login = async (req, res, next) => {
   try {
     const user = await User.findOne({ where: { email: req.body.email, isDeleted: false } });
     if (!user) {
-      return res.status(400).json({ error: { message: 'Email does not exist' } });
+      return res.status(400).json({ error: { message: 'Invalid Email Password Combination' } });
     }
     if (!user.isEmailVerified) {
       return res.status(400).json({ error: { message: 'Email not verified. Plese verify email' } });
     }
     const isMatch = await bcrypt.compare(req.body.password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ error: { message: 'Incorrect password' } });
+      return res.status(400).json({ error: { message: 'Invalid Email Password Combination' } });
     }
     const token = jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: '1h' });
     return res.status(200).json({ token });
@@ -50,7 +50,7 @@ exports.forgotPassword = async (req, res) => {
     const { email } = req.body;
     const user = await User.findOne({ where: { email: email, isDeleted: false } });
     if (!user) {
-      return res.status(400).json({ error: { message: 'Email does not exist' } });
+      return res.status(400).json({ error: { message: 'Check your email for the reset link' } });
     }
     const resetToken = jwt.sign({ user }, process.env.JWT_SECRET_RESET, { expiresIn: '1h' });
     await user.update({ resetToken: resetToken });
