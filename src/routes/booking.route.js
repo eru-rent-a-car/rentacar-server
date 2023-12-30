@@ -18,13 +18,15 @@ router.get('/:id', checkRole([USER, ADMIN]), verify, bookingController.getById);
 
 router.get('/', verify, checkRole([ADMIN]), bookingController.getAll);
 
+router.get('/my', verify, checkRole([ADMIN, USER]), bookingController.getMyBookings);
+
 /** Post */
 router.post('/', verify, checkRole([USER]), validate(create), bookingController.create);
 
 /** Patch */
 router.patch('/:id', verify, checkRole([ADMIN]), validate(update), bookingController.update);
 
-router.patch('/accept/:id', verify, checkRole([ADMIN, USER]), validate(accept), bookingController.acceptBooking);
+router.patch('/process/:id', verify, checkRole([ADMIN, USER]), validate(accept), bookingController.processBooking);
 
 /** Delete */
 router.delete('/:id', verify, checkRole([ADMIN]), bookingController.delete);

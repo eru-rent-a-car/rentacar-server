@@ -44,9 +44,23 @@ exports.getAll = async (req, res) => {
 
 exports.getMyBookingRequests = async (req, res) => {
   try {
+    const bookings = await Vehicle.findAll({
+      where: { userId: req.user.id },
+      attributes: { exclude: ['isDeleted'] },
+      include: [{ model: Booking, where: { status: 'PENDING', isDeleted: false } }],
+    });
+    if (!bookings || bookings.length === 0) return res.status(404).json({ error: { message: 'Bookings not found' } });
+    return res.status(200).json(bookings);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
+exports.getMyBookings = async (req, res) => {
+  try {
     const bookings = await Booking.findAll({
-      where: { status: 'PENDING', isDeleted: false },
-      include: [{ model: Vehicle, where: { userId: req.user.id } }],
+      where: { userId: req.user.id, isDeleted: false },
+      include: [{ model: Vehicle }],
     });
     if (!bookings || bookings.length === 0) return res.status(404).json({ error: { message: 'Bookings not found' } });
     return res.status(200).json(bookings);
@@ -67,9 +81,9 @@ exports.update = async (req, res) => {
   }
 };
 
-exports.acceptBooking = async (req, res) => {
+exports.processBooking = async (req, res) => {
   try {
-    const booking = await Booking.findOne({ where: { id: req.params.id }, include: [Vehicle] });
+    const booking = await Booking.findOne({ where: { id: req.params.id, isDeleted: false }, include: [Vehicle] });
     if (!booking) return res.status(404).json({ error: { message: 'Booking not found' } });
     if (booking.Vehicle.userId !== req.user.id) return res.status(403).json({ error: { message: 'Unauthorized' } });
     if (booking.Vehicle.isRented) return res.status(400).json({ error: { message: 'Vehicle is already rented' } });

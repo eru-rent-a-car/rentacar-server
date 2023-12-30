@@ -16,7 +16,7 @@ const { ADMIN, USER } = require('../helpers/roles');
 /** Get */
 router.get('/', vehicleController.getAll);
 
-router.get('/my-vehicles', verify, vehicleController.getMyVehicles);
+router.get('/my', verify, vehicleController.getMyVehicles);
 
 router.get('/:id', vehicleController.getById);
 
