@@ -1,7 +1,6 @@
 const Joi = require('joi');
 
 const create = Joi.object({
-  userId: Joi.string().uuid().required(),
   vehicleId: Joi.string().uuid().required(),
   startDate: Joi.date().required(),
   endDate: Joi.date().greater(Joi.ref('startDate')).required().messages({ 'date.greater': 'End date must be greater than start date' }),

@@ -4,7 +4,11 @@ const Vehicle = require('../models/Vehicle');
 /** Create */
 exports.create = async (req, res) => {
   try {
-    const booking = new Booking(req.body);
+    const vehicle = await Vehicle.findOne({ where: { id: req.body.vehicleId, isDeleted: false } });
+    if (!vehicle) return res.status(404).json({ error: { message: 'Vehicle not found' } });
+    if (vehicle.isRented) return res.status(400).json({ error: { message: 'Vehicle is already rented' } });
+    if (vehicle.userId === req.user.id) return res.status(400).json({ error: { message: 'You cannot rent your own vehicle' } });
+    const booking = new Booking({ userId: req.user.id, ...req.body });
     await booking.save();
     return res.status(201).send(booking);
   } catch (error) {
@@ -31,7 +35,7 @@ exports.getAll = async (req, res) => {
       limit: limit || 10,
       offset: offset || 0,
     });
-    if (!bookings) return res.status(404).json({ error: { message: 'Bookings not found' } });
+    if (!bookings || bookings.length === 0) return res.status(404).json({ error: { message: 'Bookings not found' } });
     return res.status(200).json(bookings);
   } catch (error) {
     return res.status(500).json(error);
@@ -44,7 +48,7 @@ exports.getMyBookingRequests = async (req, res) => {
       where: { status: 'PENDING', isDeleted: false },
       include: [{ model: Vehicle, where: { userId: req.user.id } }],
     });
-    if (!bookings) return res.status(404).json({ error: { message: 'Bookings not found' } });
+    if (!bookings || bookings.length === 0) return res.status(404).json({ error: { message: 'Bookings not found' } });
     return res.status(200).json(bookings);
   } catch (error) {
     return res.status(500).json(error);

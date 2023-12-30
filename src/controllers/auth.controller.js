@@ -19,7 +19,8 @@ exports.register = async (req, res) => {
     await newUser.save();
     sendEmail(newUser.email, chooseMailTemplate(newUser, token, 'verifyEmail'));
     newUser.verifyToken = undefined;
-    return res.status(201).json(newUser);
+    const token2 = jwt.sign({ user: newUser }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    return res.status(201).json({ token: token2 });
   } catch (error) {
     return res.status(500).json(error);
   }
