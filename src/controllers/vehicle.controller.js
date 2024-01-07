@@ -99,11 +99,22 @@ exports.update = async (req, res) => {
 /** Delete */
 exports.delete = async (req, res) => {
   try {
-    const vehicle = await Vehicle.findOne({ where: { id: req.params.id, userId: req.user.id, isDeleted: false } });
+    const vehicle = await Vehicle.findOne({
+      where: { id: req.params.id, userId: req.user.id, isDeleted: false },
+      attributes: { exclude: ['isDeleted'] },
+      include: [
+        {
+          model: VehiclePhoto,
+          include: [{ model: Photo, attributes: { exclude: ['isDeleted'] } }],
+        },
+      ],
+    });
     if (!vehicle) return res.status(404).json({ error: { message: 'Vehicle not found!' } });
-    await vehicle.update({ isDeleted: true });
     await VehiclePhoto.update({ isDeleted: true }, { where: { vehicleId: vehicle.id } });
-    await Photo.update({ isDeleted: true }, { where: { id: vehicle.photoId } });
+    vehicle.VehiclePhotos.forEach(async (x) => {
+      await Photo.update({ isDeleted: true }, { where: { id: x.Photo.id } });
+    });
+    await vehicle.update({ isDeleted: true });
     return res.status(200).json({ message: 'Vehicle deleted successfully!' });
   } catch (error) {
     return res.status(500).json(error);
