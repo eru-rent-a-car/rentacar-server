@@ -8,9 +8,8 @@ const create = Joi.object({
   startDate: Joi.date().min(today).required().messages({
     'date.min': 'Start date must be today or later',
   }),
-  endDate: Joi.date().min(Joi.ref('startDate')).max(tomorrow).required().messages({
+  endDate: Joi.date().min(Joi.ref('startDate')).required().messages({
     'date.min': 'Start date must be today or later',
-    'date.max': 'End date must be tomorrow or earlier',
     'date.greater': 'End date must be greater than start date',
   }),
   totalPrice: Joi.number().required(),
@@ -18,9 +17,8 @@ const create = Joi.object({
 
 const update = Joi.object({
   startDate: Joi.date().min(today).required(),
-  endDate: Joi.date().min(Joi.ref('startDate')).max(tomorrow).required().messages({
+  endDate: Joi.date().min(Joi.ref('startDate')).required().messages({
     'date.min': 'Start date must be today or later',
-    'date.max': 'End date must be tomorrow or earlier',
     'date.greater': 'End date must be greater than start date',
   }),
   totalPrice: Joi.number(),
