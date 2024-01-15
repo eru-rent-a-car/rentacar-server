@@ -14,11 +14,11 @@ const { ADMIN, USER } = require('../helpers/roles');
 /** Get */
 router.get('/requests', verify, checkRole([ADMIN, USER]), bookingController.getMyBookingRequests);
 
+router.get('/my', verify, checkRole([ADMIN, USER]), bookingController.getMyBookings);
+
 router.get('/:id', checkRole([USER, ADMIN]), verify, bookingController.getById);
 
 router.get('/', verify, checkRole([ADMIN]), bookingController.getAll);
-
-router.get('/my', verify, checkRole([ADMIN, USER]), bookingController.getMyBookings);
 
 /** Post */
 router.post('/', verify, checkRole([USER]), validate(create), bookingController.create);

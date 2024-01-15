@@ -57,16 +57,12 @@ exports.getMyBookingRequests = async (req, res) => {
 };
 
 exports.getMyBookings = async (req, res) => {
-  try {
-    const bookings = await Booking.findAll({
-      where: { userId: req.user.id, isDeleted: false },
-      include: [{ model: Vehicle }],
-    });
-    if (!bookings || bookings.length === 0) return res.status(404).json({ error: { message: 'Bookings not found' } });
-    return res.status(200).json(bookings);
-  } catch (error) {
-    return res.status(500).json(error);
-  }
+  const bookings = await Booking.findAll({
+    where: { userId: req.user.id, isDeleted: false },
+    include: [{ model: Vehicle }],
+  });
+  if (!bookings || bookings.length === 0) return res.status(404).json({ error: { message: 'Bookings not found' } });
+  return res.status(200).json(bookings);
 };
 
 /** Update */
